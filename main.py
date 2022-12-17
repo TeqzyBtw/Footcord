@@ -30,5 +30,12 @@ async def countrys(interaction: nextcord.Interaction):
     stringcounter = data.decode("utf-8")
     embed = nextcord.Embed(title="Current Countrys That Are Still In", description=f"{stringcounter}", color=nextcord.Color.green)
 
+@client.slash_command(description="Get A List Of Available Leagues And Cups")
+async def leagues(interaction: nextcord.Interaction):
+    conn.request("GET", "/leagues", headers=headers)
+    res = conn.getresponse()
+    data = res.read()
+    stringcounter = data.decode("utf-8")
+    embed = nextcord.Embed(title="List Of Available Leagues And Cups", description=f"{stringcounter}", color=nextcord.Color.red)
 
 client.run("TOKEN HERE")
