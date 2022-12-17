@@ -21,14 +21,15 @@ async def on_ready():
         #await asyncio.sleep(15)
 
 
-
 @client.slash_command(description="Sends The Current Countrys That Are Still Not Eliminated")
 async def countrys(interaction: nextcord.Interaction):
     conn.request("GET", "/countries", headers=headers)
     res = conn.getresponse()
     data = res.read()
-    stringcounter = data.decode("utf-8")
-    embed = nextcord.Embed(title="Current Countrys That Are Still In", description=f"{stringcounter}", color=nextcord.Color.green)
+    #stringcounter = data.decode("utf-8")
+    embed = nextcord.Embed(title="Current Countrys That Are Still In", description=None, color=nextcord.Color.green)
+    for name in data["parameters"]:
+        embed.add_field(name=name, value="Is Still In The Cup")
 
 @client.slash_command(description="Get A List Of Available Leagues And Cups")
 async def leagues(interaction: nextcord.Interaction):
